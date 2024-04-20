@@ -1,0 +1,51 @@
+html {
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: .5rem;
+  border: 1px black solid;
+  width: 30%;
+  padding: 3rem 1rem;
+
+  border-radius: .5rem;
+  border: 1px black solid;
+}
+
+div {
+  display: flex;
+  gap: 2rem;
+}
+
+button {
+  border-radius: .5rem;
+  padding: .5rem;
+  color: white;
+  width: 10rem;
+  padding: 1rem 0;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+#btn__other {
+  background-color: blue;
+}
+
+#btn__home {
+  background-color: red;
+}

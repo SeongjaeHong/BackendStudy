@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+
+    {% load static %}
+    <link
+      rel="stylesheet"
+      href="{% static 'meteo/index.css' %}" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <section>
+      <h1>Temperature at {{city}}:</h1>
+      <h2>{{temp}} &#8451;</h2>
+      <div>
+        <form action="{% url 'temp_somewhere' %}">
+          <button id="btn__other">Check other places</button>
+        </form>
+        <form action="{% url 'temp_here' %}">
+          <button id="btn__home">Home</button>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
