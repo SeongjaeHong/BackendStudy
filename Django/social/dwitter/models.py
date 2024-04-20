@@ -25,3 +25,18 @@ def create_profile(user):
     profile = Profile.objects.create(user=user)
     profile.save()
     
+class Dweet(models.Model):
+    user = models.ForeignKey(
+        User, related_name='dweets', on_delete=models.DO_NOTHING
+    )
+    body = models.CharField(max_length=140)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        if len(self.body) > 30:
+            msg = self.body[:30] + '...'
+        else:
+            msg = self.body
+            
+        time = '{}/{:02d}/{:02d} {:02d}:{:02d}'.format(self.created_at.year, self.created_at.month, self.created_at.day, self.created_at.hour, self.created_at.minute)
+        return f'{self.user}, ({time}), {msg}'
