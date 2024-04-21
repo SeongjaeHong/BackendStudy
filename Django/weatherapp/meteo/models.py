@@ -7,7 +7,7 @@ class Worldcities(models.Model):
     lng = models.FloatField(blank=True, null=True)
     country = models.TextField(blank=True, null=True)
     id = models.IntegerField(blank=True, primary_key=True)
-    
+
     class Meta:
         managed = False
         db_table = 'worldcities'

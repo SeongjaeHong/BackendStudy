@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
-from .models import Dweet, Profile, create_profile
+from django.shortcuts import redirect, render
+
 from .forms import DweetForm
+from .models import Dweet, Profile, create_profile
 
 
 def profile_list(request):
