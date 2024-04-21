@@ -12,6 +12,12 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Login succeeded.</h1>
+    <h1>Login Now!</h1>
+    <form method="POST">
+      {% csrf_token %} {{loginform.as_p}}
+      <input
+        type="submit"
+        value="Register" />
+    </form>
   </body>
 </html>
