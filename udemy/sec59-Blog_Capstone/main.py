@@ -1,11 +1,14 @@
 from flask import Flask, render_template
+import requests
 
 app = Flask(__name__)
 
 @app.route('/')
 @app.route('/index.html')
 def main():
-    return render_template('index.html')
+    response = requests.get('https://api.npoint.io/495f53c32892edd20f6e')
+    posts = response.json()
+    return render_template('index.html', posts=posts)
 
 @app.route('/post.html')
 def page_post():
