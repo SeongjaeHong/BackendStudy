@@ -24,10 +24,7 @@ def home():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     myform = MyForm()
-    if request.method == 'POST':
-        data = request.form
-        print(myform.validate_on_submit())
-        print(data)
+    if myform.validate_on_submit():
         return redirect(request.url)
     return render_template('login.html', form=myform)
 
