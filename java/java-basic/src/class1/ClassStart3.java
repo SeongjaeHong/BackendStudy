@@ -13,17 +13,20 @@ public class ClassStart3 {
         orders[1].price = 5000;
         orders[1].quantity = 1;
 
-        orders[2] = new ProductOrder();
-        orders[2].name = "Coke";
-        orders[2].price = 1500;
-        orders[2].quantity = 2;
+        System.out.println(orders[1].price);
+        changeValue(orders[1], 6900);
+        System.out.println(orders[1].price);
 
-        int sum = 0;
-        for(ProductOrder order: orders){
-            System.out.printf("Product: %s, Price: %s, Quantity: %s\n",
-                    order.name, order.price, order.quantity);
-            sum += (order.price * order.quantity);
-        }
-        System.out.println("Price in total: " + sum);
+        int value = getValue(orders[0]);
+        System.out.println(value);
+    }
+
+    public static void changeValue(ProductOrder po, int price){
+        po.price = price;
+    }
+
+    public static int getValue(ProductOrder po) {
+        return po.price;
     }
 }
+

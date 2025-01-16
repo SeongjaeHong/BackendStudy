@@ -1,7 +1,7 @@
 package class1;
 
 public class ProductOrder {
-    String name;
-    int price;
-    int quantity;
+    public String name;
+    public int price;
+    public int quantity;
 }
