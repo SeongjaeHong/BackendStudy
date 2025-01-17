@@ -5,5 +5,6 @@ public class PackageMain1 {
     public static void main(String[] args) {
         Data data = new Data();
         User user = new User();
+        pack.b.User userB = new pack.b.User();
     }
 }
