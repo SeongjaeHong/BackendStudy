@@ -1,9 +1,9 @@
 package poly.ex;
 
-public class AnimalSound {
-    public void Sound() {
-        System.out.println("Animal sound");
-    }
+public abstract class AnimalSound {
+
+    public abstract void Sound();
+
     public static void main(String[] args) {
         AnimalSound dog = new Dog();
         AnimalSound cow = new Cow();
