@@ -8,13 +8,7 @@ public class CardDeck {
     private int currentIndex = 0;
 
     CardDeck() {
-        List<Suit> suits = new ArrayList<>();
-        suits.add(Suit.SPADE);
-        suits.add(Suit.HEART);
-        suits.add(Suit.DIAMOND);
-        suits.add(Suit.CLUB);
-
-        for (Suit suit: suits){
+        for (Suit suit: Suit.values()){
             for (int rank=1; rank <= 13; rank++) {
                 deck.add(deck.size(), new Card(suit, rank));
             }
