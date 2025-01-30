@@ -9,7 +9,7 @@ public class Card implements Comparable<Card>{
         } else if (this.rank < o.rank) {
             return -1;
         } else {
-            return Integer.compare(this.suit.getRank(), o.suit.getRank());
+            return this.suit.compareTo(o.suit);
         }
     }
 
