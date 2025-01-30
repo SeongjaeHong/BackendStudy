@@ -4,10 +4,8 @@ public class Card implements Comparable<Card>{
 
     @Override
     public int compareTo(Card o) {
-        if (this.rank > o.rank) {
-            return 1;
-        } else if (this.rank < o.rank) {
-            return -1;
+        if (this.rank != o.rank) {
+            return Integer.compare(this.rank, o.rank);
         } else {
             return this.suit.compareTo(o.suit);
         }
