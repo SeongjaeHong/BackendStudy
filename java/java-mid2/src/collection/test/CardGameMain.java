@@ -1,8 +1,5 @@
 package collection.test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CardGameMain {
     public static void main(String[] args) {
         CardDeck deck = new CardDeck();

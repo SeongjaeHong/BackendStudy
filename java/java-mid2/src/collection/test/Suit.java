@@ -16,8 +16,4 @@ public enum Suit {
     public String getIcon() {
         return icon;
     }
-
-    public int getRank() {
-        return rank;
-    }
 }
