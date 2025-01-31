@@ -2,14 +2,17 @@ package hello_group.hello_spring.service;
 
 import hello_group.hello_spring.domain.Member;
 import hello_group.hello_spring.repository.MemberRepository;
-import hello_group.hello_spring.repository.MemoryMemberRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public class MemberService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     public Long join(Member member) {
         validateMemberDuplication(member);
