@@ -1,20 +1,19 @@
 package hello_group.hello_spring;
 
-import hello_group.hello_spring.repository.MemoryMemberRepository;
-//import hello_group.hello_spring.service.MemberService;
+import hello_group.hello_spring.repository.JPAMemberRepository;
+import hello_group.hello_spring.repository.MemberRepository;
+import jakarta.persistence.EntityManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SpringConfig {
 
-//    @Bean
-//    public MemberService memberService() {
-//        return new MemberService(memoryMemberRepository());
-//    }
+    private final MemberRepository memberRepository;
 
-    @Bean
-    public MemoryMemberRepository memoryMemberRepository() {
-        return new MemoryMemberRepository();
+    @Autowired
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 }
