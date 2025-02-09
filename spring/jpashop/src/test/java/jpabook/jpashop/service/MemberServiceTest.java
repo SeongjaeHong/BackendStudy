@@ -17,7 +17,7 @@ class MemberServiceTest {
     @Autowired MemberRepository memberRepository;
 
     @Test
-    public void 회원가입() throws Exception {
+    public void 회원가입() {
         Member member = new Member();
         member.setName("member1");
 
@@ -27,7 +27,20 @@ class MemberServiceTest {
     }
 
     @Test
-    public void 중복_회원_예외() throws Exception {
+    public void 중복_회원_예외() {
+        Member member = new Member();
+        member.setName("member_duplicated");
 
+        Member member2 = new Member();
+        member2.setName("member_duplicated");
+
+        memberService.join(member);
+        try {
+            memberService.join(member2);  // 예외 발생
+        } catch (IllegalStateException e) {
+            return;
+        }
+
+        fail("예외가 발생해야 한다.");
     }
 }
