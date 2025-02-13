@@ -11,8 +11,10 @@ import lombok.Setter;
 @Getter
 public class Book extends Item {
 
-    private final String author;
-    private final String isbn;
+    private String author;
+    private String isbn;
+
+    public Book() {}
 
     public Book(BookForm bookForm) {
         this.setName(bookForm.getName());
