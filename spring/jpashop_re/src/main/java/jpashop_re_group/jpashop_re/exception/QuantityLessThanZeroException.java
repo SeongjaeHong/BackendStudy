@@ -1,4 +1,4 @@
-package exception;
+package jpashop_re_group.jpashop_re.exception;
 
 public class QuantityLessThanZeroException extends Exception{
     public QuantityLessThanZeroException() {

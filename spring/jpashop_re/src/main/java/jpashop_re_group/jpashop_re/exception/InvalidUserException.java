@@ -1,4 +1,4 @@
-package exception;
+package jpashop_re_group.jpashop_re.exception;
 
 public class InvalidUserException extends Exception {
     public InvalidUserException() {
