@@ -1,10 +1,9 @@
 package jpashop_re_group.jpashop_re.domain;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jpashop_re_group.jpashop_re.exception.InvalidUserException;
 import jpashop_re_group.jpashop_re.exception.QuantityLessThanZeroException;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,10 +13,13 @@ public class Product {
 
     @Id @GeneratedValue
     private Long productId;
+
+    @NotEmpty
     private String name;
 
     @Setter
-    private Long sellerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Seller seller;
 
     @Setter
     private int price;
@@ -26,7 +28,7 @@ public class Product {
     private int quantity;
 
     public boolean changePrice(int newPrice, Long sellerId) throws InvalidUserException {
-        if (!sellerId.equals(this.sellerId)) {
+        if (!sellerId.equals(this.seller.getSellerId())) {
             throw new InvalidUserException("물건 판매자가 아닙니다.");
         }
         this.price = newPrice;

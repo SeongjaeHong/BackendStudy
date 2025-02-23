@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 public class Member {
@@ -29,4 +32,7 @@ public class Member {
     )
     @Setter
     private Seller seller;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Orders> orders = new ArrayList<>();
 }

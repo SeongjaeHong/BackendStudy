@@ -2,6 +2,7 @@ package jpashop_re_group.jpashop_re.service;
 
 import jpashop_re_group.jpashop_re.domain.Product;
 import jpashop_re_group.jpashop_re.domain.Member;
+import jpashop_re_group.jpashop_re.domain.Seller;
 import jpashop_re_group.jpashop_re.exception.InvalidUserException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,18 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class ProductServiceTest {
 
-    @Autowired
-    MemberRepository memberRepository;
+    @Autowired MemberRepository memberRepository;
     @Autowired ProductService productService;
+    @Autowired SellerService sellerService;
+
     Member member = new Member();
+    Seller seller = new Seller();
     Product product = new Product();
 
-    void presetMember() {
+    void presetSeller() {
         member.setMemberName("User-A");
         memberRepository.save(member);
+        sellerService.save(seller, member);
     }
 
     void presetProduct() {
@@ -34,13 +38,13 @@ class ProductServiceTest {
 
     @Test
     public void 가격변경() throws Exception {
-        presetMember();
+        presetSeller();
         presetProduct();
         productService.save(product);
-        product.setSellerId(member.getMemberId());
+        product.setSeller(seller);
 
         // 적법한 판매자가 가격변경 시도
-        Boolean result =  product.changePrice(2000, member.getMemberId());
+        Boolean result =  product.changePrice(2000, seller.getSellerId());
         assertEquals(true, result);
         assertEquals(2000, product.getPrice());
 
