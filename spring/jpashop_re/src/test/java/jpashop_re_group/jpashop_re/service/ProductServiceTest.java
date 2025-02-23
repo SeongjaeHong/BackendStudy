@@ -22,7 +22,7 @@ class ProductServiceTest {
     Product product = new Product();
 
     void presetMember() {
-        member.setName("User-A");
+        member.setMemberName("User-A");
         memberRepository.save(member);
     }
 
