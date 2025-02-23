@@ -18,19 +18,28 @@ class SellerServiceTest {
     @Autowired MemberService memberService;
 
     @Test
-    @Rollback(value = false)
-    public void 판매자등록() throws Exception {
+    public void 판매자등록() {
         Member member = new Member();
-        Member member2 = new Member();
         member.setMemberName("member-1");
-        member2.setMemberName("member-2");
         memberService.save(member);
-        memberService.save(member2);
 
         Seller seller = new Seller();
-        Long sellerId = sellerService.save(seller, member2);
+        Long sellerId = sellerService.save(seller, member);
         Seller savedSeller = sellerService.findSeller(sellerId);
 
         assertEquals(seller, savedSeller);
+    }
+
+    @Test
+    public void 판매자로등록된멤버찾기() {
+        Member member = new Member();
+        member.setMemberName("member-1");
+        memberService.save(member);
+
+        Seller seller = new Seller();
+        sellerService.save(seller, member);
+        Member searchedMember = sellerService.findregisteredMember(member.getMemberId());
+
+        assertEquals(member, searchedMember);
     }
 }
