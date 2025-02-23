@@ -22,4 +22,8 @@ public class SellerService {
     public Seller findSeller(Long sellerId) {
         return sellerRepository.findById(sellerId);
     }
+
+    public Member findregisteredMember(Long memberId) {
+        return sellerRepository.findRegisteredMemberById(memberId);
+    }
 }

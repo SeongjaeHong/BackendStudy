@@ -1,6 +1,7 @@
 package jpashop_re_group.jpashop_re.repository;
 
 import jakarta.persistence.EntityManager;
+import jpashop_re_group.jpashop_re.domain.Member;
 import jpashop_re_group.jpashop_re.domain.Seller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,12 @@ public class SellerRepository {
     public Seller findById(Long sellerId) {
         return em.createQuery("select s from Seller s where s.sellerId = :sellerId", Seller.class)
                 .setParameter("sellerId", sellerId)
+                .getSingleResult();
+    }
+
+    public Member findRegisteredMemberById(Long memberId) {
+        return em.createQuery("select m from Member m where m.memberId = :memberId", Member.class)
+                .setParameter("memberId", memberId)
                 .getSingleResult();
     }
 }
