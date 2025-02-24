@@ -13,6 +13,7 @@ public class MemberRepository {
 
     private final EntityManager em;
 
+    @Transactional
     public void save(Member member) {
         em.persist(member);
     }
