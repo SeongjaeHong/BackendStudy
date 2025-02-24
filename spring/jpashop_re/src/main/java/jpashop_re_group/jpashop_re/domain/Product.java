@@ -7,14 +7,18 @@ import jpashop_re_group.jpashop_re.exception.QuantityLessThanZeroException;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
-public class Product {
+public abstract class Product {
 
     @Id @GeneratedValue
     private Long productId;
 
     @NotEmpty
+    @Setter
     private String name;
 
     @Setter
@@ -22,12 +26,15 @@ public class Product {
     private Seller seller;
 
     @Setter
-    private int price;
+    private Long price;
 
     @Setter
     private int quantity;
 
-    public boolean changePrice(int newPrice, Long sellerId) throws InvalidUserException {
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Suborder> suborders = new ArrayList<>();
+
+    public boolean changePrice(Long newPrice, Long sellerId) throws InvalidUserException {
         if (!sellerId.equals(this.seller.getSellerId())) {
             throw new InvalidUserException("물건 판매자가 아닙니다.");
         }
@@ -35,12 +42,12 @@ public class Product {
         return true;
     }
 
-    public boolean changeQuantity(int changeValue) throws QuantityLessThanZeroException {
-        int tempQuantity = quantity + changeValue;
+    public boolean subtractQuantity(int value) throws QuantityLessThanZeroException {
+        int tempQuantity = quantity - value;
         if (tempQuantity < 0) {
             throw new QuantityLessThanZeroException();
         }
-        quantity += changeValue;
+        quantity -= value;
         return true;
     }
 }

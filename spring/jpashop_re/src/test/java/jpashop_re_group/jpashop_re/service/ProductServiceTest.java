@@ -3,6 +3,7 @@ package jpashop_re_group.jpashop_re.service;
 import jpashop_re_group.jpashop_re.domain.Product;
 import jpashop_re_group.jpashop_re.domain.Member;
 import jpashop_re_group.jpashop_re.domain.Seller;
+import jpashop_re_group.jpashop_re.domain.item.Book;
 import jpashop_re_group.jpashop_re.exception.InvalidUserException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ class ProductServiceTest {
 
     Member member = new Member();
     Seller seller = new Seller();
-    Product product = new Product();
+    Book book = new Book();
 
     void presetSeller() {
         member.setMemberName("User-A");
@@ -31,28 +32,28 @@ class ProductServiceTest {
     }
 
     void presetProduct() {
-        product.setPrice(1000);
-        product.setQuantity(5);
-        productService.save(product);
+        book.setName("Book-A");
+        book.setPrice(10000L);
+        book.setQuantity(500);
+        book.setSeller(seller);
+        productService.save(book);
     }
 
     @Test
     public void 가격변경() throws Exception {
         presetSeller();
         presetProduct();
-        productService.save(product);
-        product.setSeller(seller);
 
         // 적법한 판매자가 가격변경 시도
-        Boolean result =  product.changePrice(2000, seller.getSellerId());
+        Boolean result =  book.changePrice(2000L, seller.getSellerId());
         assertEquals(true, result);
-        assertEquals(2000, product.getPrice());
+        assertEquals(2000, book.getPrice());
 
         // 적법하지 않은 판매자가 가격변경 시도
         InvalidUserException exception = assertThrows(
                 InvalidUserException.class,
                 () -> {
-                    product.changePrice(2000, -1L);
+                    book.changePrice(2000L, -1L);
                 },
                 "InvalidUserException이 발생해야 한다."
         );
