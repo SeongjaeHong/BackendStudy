@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 public class Seller {
@@ -18,4 +21,7 @@ public class Seller {
 
     @OneToOne(mappedBy = "seller")
     private Member member;
+
+    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
+    private List<Product> products = new ArrayList<>();
 }
