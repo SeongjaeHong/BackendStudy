@@ -17,6 +17,11 @@ public class SubOrderService {
         subOrderRepository.saveSubOrder(suborder);
     }
 
+    public void cancelSuborder(Suborder suborder) {
+        suborder.getProduct().addQuantity(suborder.getQuantity());
+        subOrderRepository.deleteSubOrder(suborder.getId());
+    }
+
     public List<Suborder> findSubOrdersByOrdersId(Long ordersId) {
         return subOrderRepository.findSubOrdersByOrdersId(ordersId);
     }

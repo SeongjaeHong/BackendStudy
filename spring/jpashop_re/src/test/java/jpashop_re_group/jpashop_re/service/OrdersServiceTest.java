@@ -83,4 +83,84 @@ class OrdersServiceTest {
         assertEquals(500-10, book.getQuantity());
         assertEquals(200-6, book2.getQuantity());
     }
+
+    @Test
+    @Rollback(value = false)
+    public void 주문취소() throws Exception {
+        Member member = setMember("member-A");
+        Orders order = new Orders();
+
+        Book book = new Book();
+        book.setName("Book-A");
+        book.setPrice(10000L);
+        book.setQuantity(500);
+        productService.save(book);
+
+        Suborder suborder1 = new Suborder();
+        suborder1.setOrders(order);
+        suborder1.setProduct(book);
+        suborder1.setQuantity(10);
+        order.addSubOrder(suborder1);
+
+        orderService.saveOrder(order, member);
+
+        Member member2 = setMember("member-B");
+        assertThrowsExactly(IllegalAccessException.class,
+                () -> {
+                    orderService.cancelOrder(order, member2);
+                }, "IllegalAccessException가 발동해야 합니다.");
+
+
+        orderService.cancelOrder(order, member);
+
+        List<Suborder> subOrders = orderService.findSubOrdersByOrdersId(order.getOrderId());
+        assertEquals(0, subOrders.size());
+
+        List<Orders> orders = orderService.findOrdersByMemberId(member.getMemberId());
+        assertEquals(0, orders.size());
+
+        assertEquals(500, book.getQuantity());
+    }
+
+    @Test
+    public void 세부주문취소() throws Exception {
+        Member member = setMember("member-A");
+        Orders order = new Orders();
+
+        Book book = new Book();
+        book.setName("Book-A");
+        book.setPrice(10000L);
+        book.setQuantity(500);
+        productService.save(book);
+
+        Book book2 = new Book();
+        book2.setName("Book-B");
+        book2.setPrice(7000L);
+        book2.setQuantity(200);
+        productService.save(book2);
+
+        Suborder suborder1 = new Suborder();
+        suborder1.setOrders(order);
+        suborder1.setProduct(book);
+        suborder1.setQuantity(10);
+        order.addSubOrder(suborder1);
+
+        Suborder suborder2 = new Suborder();
+        suborder2.setOrders(order);
+        suborder2.setProduct(book2);
+        suborder2.setQuantity(6);
+        order.addSubOrder(suborder2);
+
+        orderService.saveOrder(order, member);
+
+        Member member2 = setMember("member-B");
+        assertThrowsExactly(IllegalAccessException.class,
+                () -> {
+                    orderService.cancelSuborder(suborder1, member2);
+                }, "IllegalAccessException가 발동해야 합니다.");
+
+        orderService.cancelSuborder(suborder1, member);
+        assertEquals(500, book.getQuantity());
+        assertEquals(194, book2.getQuantity());
+    }
 }

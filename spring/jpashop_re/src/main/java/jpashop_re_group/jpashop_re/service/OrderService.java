@@ -23,14 +23,23 @@ public class OrderService {
         return orders.getOrderId();
     }
 
-    public Long aggregate(Orders orders) {
-        List<Suborder> suborders = findSubOrdersByOrdersId(orders.getOrderId());
-
-        Long price = 0L;
-        for (Suborder suborder: suborders) {
-            price += suborder.getProduct().getPrice();
+    public void cancelOrder(Orders orders, Member member) throws IllegalAccessException{
+        for (Suborder so: findSubOrdersByOrdersId(orders.getOrderId())) {
+            subOrderService.cancelSuborder(so);
         }
-        return price;
+        if (orders.getMember().equals(member)) {
+            orderRepository.deleteOrder(orders.getOrderId());
+        } else {
+            throw new IllegalAccessException();
+        }
+    }
+
+    public void cancelSuborder(Suborder suborder, Member member) throws IllegalAccessException{
+        if (suborder.getOrders().getMember().equals(member)) {
+            subOrderService.cancelSuborder(suborder);
+        } else {
+            throw new IllegalAccessException();
+        }
     }
 
     public List<Orders> findOrdersByMemberId(Long memberId) {

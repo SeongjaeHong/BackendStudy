@@ -20,9 +20,17 @@ public class SubOrderRepository {
         em.persist(suborder);
     }
 
+    @Transactional
+    public void deleteSubOrder(Long suborderId) {
+        jakarta.persistence.Query query = em.createQuery("DELETE FROM Suborder WHERE id = :suborderId");
+        query.setParameter("suborderId", suborderId);
+
+        query.executeUpdate();
+    }
+
     public List<Suborder> findSubOrdersByOrdersId(Long ordersId) {
-        return em.createQuery("SELECT subo FROM Suborder JOIN subo.orders o " +
-                "WHERE o.orderId == :ordersId", Suborder.class)
+        return em.createQuery("SELECT so FROM Suborder so JOIN so.orders o " +
+                "WHERE o.orderId=:ordersId", Suborder.class)
                 .setParameter("ordersId", ordersId)
                 .getResultList();
     }
