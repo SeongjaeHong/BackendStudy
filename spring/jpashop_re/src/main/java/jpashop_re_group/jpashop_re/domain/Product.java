@@ -42,6 +42,11 @@ public abstract class Product {
         return true;
     }
 
+    public boolean addQuantity(int value) {
+        quantity += value;
+        return true;
+    }
+
     public boolean subtractQuantity(int value) throws QuantityLessThanZeroException {
         int tempQuantity = quantity - value;
         if (tempQuantity < 0) {
