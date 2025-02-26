@@ -11,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 public class Suborder {
 
     @Id @GeneratedValue
+    @Getter
     private Long Id;
 
     @ManyToOne(fetch = FetchType.LAZY)
