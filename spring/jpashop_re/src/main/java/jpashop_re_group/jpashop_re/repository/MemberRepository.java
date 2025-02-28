@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -16,5 +18,10 @@ public class MemberRepository {
     @Transactional
     public void save(Member member) {
         em.persist(member);
+    }
+
+    public List<Member> findall() {
+        return em.createQuery("SELECT m FROM Member m", Member.class)
+                .getResultList();
     }
 }
