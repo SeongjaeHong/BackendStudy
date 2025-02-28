@@ -17,10 +17,22 @@ public class ProductRepository {
 
     @Transactional
     public void save(Product product) {
-        em.persist(product);
+        if (product.getProductId() == null) {
+            em.persist(product);
+        } else {
+            em.merge(product);
+        }
     }
 
     public List<Product> findall() {
         return em.createQuery("SELECT p FROM Product p", Product.class).getResultList();
+    }
+
+    public Product findbyId(Long productId) {
+        return em.createQuery("SELECT p FROM Product p where p.productId = :productId", Product.class)
+                .setParameter("productId", productId)
+                .getSingleResult();
+
+//        em.find(Product.class, productId);
     }
 }
