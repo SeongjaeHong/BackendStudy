@@ -17,4 +17,14 @@ public class Book extends Product {
         author = form.getAuthor();
         isbn = form.getIsbn();
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "name='" + getName() + "'" +
+                "price='" + getPrice() + "'" +
+                "author='" + author + '\'' +
+                ", isbn='" + isbn + '\'' +
+                '}';
+    }
 }
