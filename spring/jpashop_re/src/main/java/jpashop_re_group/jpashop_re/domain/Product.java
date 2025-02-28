@@ -59,7 +59,7 @@ public abstract class Product {
 
     public void setAttributes(BookForm form) {
         name = form.getName();
-        price = (long) form.getPrice();
+        price = form.getPrice();
         quantity = form.getStockQuantity();
     }
 }
