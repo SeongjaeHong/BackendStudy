@@ -2,6 +2,7 @@ package jpashop_re_group.jpashop_re.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jpashop_re_group.jpashop_re.controller.BookForm;
 import jpashop_re_group.jpashop_re.exception.InvalidUserException;
 import jpashop_re_group.jpashop_re.exception.QuantityLessThanZeroException;
 import lombok.Getter;
@@ -54,5 +55,11 @@ public abstract class Product {
         }
         quantity -= value;
         return true;
+    }
+
+    public void setAttributes(BookForm form) {
+        name = form.getName();
+        price = (long) form.getPrice();
+        quantity = form.getStockQuantity();
     }
 }
