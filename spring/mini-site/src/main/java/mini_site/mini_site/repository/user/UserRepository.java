@@ -1,7 +1,7 @@
 package mini_site.mini_site.repository.user;
 
-import org.springframework.stereotype.Repository;
+import mini_site.mini_site.domain.user.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public class UserRepository {
+public interface UserRepository extends JpaRepository<User, Long> {
 }
