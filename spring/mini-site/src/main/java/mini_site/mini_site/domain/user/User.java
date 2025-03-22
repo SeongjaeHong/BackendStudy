@@ -22,6 +22,9 @@ public class User {
     @Setter
     private String name;
 
+    @Setter
+    private UserLevel userLevel = UserLevel.MEMBER;
+
     @NotBlank
     @Setter
     private String password;

@@ -1,6 +1,7 @@
 package mini_site.mini_site.service.user;
 
 import mini_site.mini_site.domain.user.User;
+import mini_site.mini_site.domain.user.UserLevel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,6 @@ class UserServiceTest {
         User user = userService.registerUser("name1", "pass");
         assertEquals("name1", user.getName());
         assertEquals("pass", user.getPassword());
+        assertEquals(UserLevel.MEMBER, user.getUserLevel());
     }
 }
