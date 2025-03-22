@@ -15,10 +15,10 @@ public class Comment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_comment_id", referencedColumnName = "comment_id")
-    private Long parentCommentId;
+    private Comment parentComment;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parentCommentId", cascade = CascadeType.ALL)
-    private List<Comment> subComments = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parentComment", cascade = CascadeType.ALL)
+    private List<Comment> childrenComments = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id", referencedColumnName = "post_id")
