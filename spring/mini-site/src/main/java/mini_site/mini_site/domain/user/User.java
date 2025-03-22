@@ -2,6 +2,8 @@ package mini_site.mini_site.domain.user;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 import mini_site.mini_site.domain.billboard.Comment;
 import mini_site.mini_site.domain.billboard.Post;
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,15 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 public class User {
     @Id @GeneratedValue
     @Column(name = "user_id")
     private Long id;
 
     @NotBlank
+    @Setter
     private String name;
 
     @NotBlank
+    @Setter
     private String password;
 
     @CreationTimestamp
