@@ -1,9 +1,9 @@
-package mini_site.mini_site.controller.user;
+package mini_site.mini_site.controller.member;
 
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class UserController {
+public class MemberController {
     // 사용자 페이지
     // 회원 정보 탭
     // 작성 글 보기 탭

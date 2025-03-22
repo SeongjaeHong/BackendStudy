@@ -1,4 +1,4 @@
-package mini_site.mini_site.service.user;
+package mini_site.mini_site.service.member;
 
 import org.springframework.stereotype.Service;
 

@@ -1,14 +1,9 @@
 package mini_site.mini_site.service.billboard;
 
 import mini_site.mini_site.domain.billboard.Billboard;
-import mini_site.mini_site.domain.user.User;
-import mini_site.mini_site.domain.user.UserLevel;
+import mini_site.mini_site.domain.member.MemberLevel;
 import mini_site.mini_site.exception.BillboardException;
-import mini_site.mini_site.service.user.UserService;
-import mini_site.mini_site.service.user.dto.request.RegisterUserRequest;
-import mini_site.mini_site.service.user.dto.response.UserResponse;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import mini_site.mini_site.service.member.dto.response.MemberResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +21,10 @@ class BillboardServiceTest {
     @Test
     void registerBillboard() {
         // given
-        UserResponse userResponse = new UserResponse(1L, "admin", UserLevel.ADMIN);
+        MemberResponse memberResponse = new MemberResponse(1L, "admin", MemberLevel.ADMIN);
 
         // when
-        Billboard billboard = billboardService.registerBillboard("test", userResponse);
+        Billboard billboard = billboardService.registerBillboard("test", memberResponse);
 
         // then
         assertEquals("test", billboard.getName());
@@ -39,8 +34,8 @@ class BillboardServiceTest {
     @Test
     void findBillboardById() {
         // given
-        UserResponse userResponse = new UserResponse(1L, "admin", UserLevel.ADMIN);
-        Billboard billboard = billboardService.registerBillboard("test", userResponse);
+        MemberResponse memberResponse = new MemberResponse(1L, "admin", MemberLevel.ADMIN);
+        Billboard billboard = billboardService.registerBillboard("test", memberResponse);
 
         // when
         Billboard foundBillboard = billboardService.findBillboardById(billboard.getId());

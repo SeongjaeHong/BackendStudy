@@ -2,19 +2,22 @@ package mini_site.mini_site.service.billboard;
 
 import lombok.RequiredArgsConstructor;
 import mini_site.mini_site.domain.billboard.Billboard;
-import mini_site.mini_site.domain.user.UserLevel;
+import mini_site.mini_site.domain.member.MemberLevel;
 import mini_site.mini_site.exception.BillboardException;
 import mini_site.mini_site.repository.billboard.BillboardRepository;
-import mini_site.mini_site.service.user.dto.response.UserResponse;
+import mini_site.mini_site.service.member.dto.response.MemberResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class BillboardService {
     private final BillboardRepository billboardRepository;
 
-    public Billboard registerBillboard(String name, UserResponse userResponse) throws BillboardException {
-        if (userResponse.userLevel() != UserLevel.ADMIN) {
+    @Transactional
+    public Billboard registerBillboard(String name, MemberResponse memberResponse) throws BillboardException {
+        if (memberResponse.memberLevel() != MemberLevel.ADMIN) {
             throw new BillboardException("관리자 계정만 새로운 게시판을 만들 수 있습니다.");
         }
 

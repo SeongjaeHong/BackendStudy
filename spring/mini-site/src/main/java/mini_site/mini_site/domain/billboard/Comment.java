@@ -1,7 +1,7 @@
 package mini_site.mini_site.domain.billboard;
 
 import jakarta.persistence.*;
-import mini_site.mini_site.domain.user.User;
+import mini_site.mini_site.domain.member.Member;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.ArrayList;
@@ -25,8 +25,8 @@ public class Comment {
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
+    private Member member;
 
     private String content;   // TODO: 타입 고민. 글, 그림 등을 포함할 수 있어야 함.
 
