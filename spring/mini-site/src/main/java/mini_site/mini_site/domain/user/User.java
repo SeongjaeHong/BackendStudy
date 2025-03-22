@@ -2,6 +2,7 @@ package mini_site.mini_site.domain.user;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import mini_site.mini_site.domain.billboard.Comment;
@@ -38,4 +39,10 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
+
+    @Builder
+    public User(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
 }
