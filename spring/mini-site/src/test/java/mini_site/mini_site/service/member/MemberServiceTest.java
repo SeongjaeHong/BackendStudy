@@ -10,7 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,7 +26,7 @@ class MemberServiceTest {
     @Test
     void findMemberById() {
         // given
-        RegisterMemberRequest registerMemberRequest = new RegisterMemberRequest("name1", "pass");
+        RegisterMemberRequest registerMemberRequest = new RegisterMemberRequest("name", "pass");
         MemberResponse memberResponse = memberService.registerMember(registerMemberRequest);
 
         // when
@@ -44,30 +43,24 @@ class MemberServiceTest {
     @Test
     void registerMember() {
         // given
-        RegisterMemberRequest registerMemberRequest = new RegisterMemberRequest("name1", "pass");
-        Member member = memberRepository.save(new Member("name1", "pass"));
+        RegisterMemberRequest registerMemberRequest = new RegisterMemberRequest("name123", "pass");
 
         // when
         MemberResponse memberResponse = memberService.registerMember(registerMemberRequest);
-        Member foundMember = memberRepository.findById(member.getId()).get();
+        Member foundMember = memberRepository.findById(memberResponse.memberId()).get();
 
         // then
         assertAll(
-                // Check name
-                () -> Assertions.assertThat(foundMember.getName()).isEqualTo(member.getName()),
                 () -> Assertions.assertThat(foundMember.getName()).isEqualTo(memberResponse.name()),
-
-                // Check default memberLevel
                 () -> Assertions.assertThat(foundMember.getMemberLevel()).isEqualTo(memberResponse.memberLevel())
         );
     }
 
     @DisplayName("사용자에게 관리자 권한을 부여한다.")
-    @Rollback(value = false)
     @Test
     void grantAdmin() {
         // given
-        RegisterMemberRequest registerMemberRequest = new RegisterMemberRequest("name1", "pass");
+        RegisterMemberRequest registerMemberRequest = new RegisterMemberRequest("admin", "pass");
         MemberResponse memberResponse = memberService.registerMember(registerMemberRequest);
 
         // when
