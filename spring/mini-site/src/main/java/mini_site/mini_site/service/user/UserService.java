@@ -2,6 +2,7 @@ package mini_site.mini_site.service.user;
 
 import lombok.RequiredArgsConstructor;
 import mini_site.mini_site.domain.user.User;
+import mini_site.mini_site.domain.user.UserLevel;
 import mini_site.mini_site.exception.UserException;
 import mini_site.mini_site.repository.user.UserRepository;
 import mini_site.mini_site.service.user.dto.request.RegisterUserRequest;
@@ -28,6 +29,13 @@ public class UserService {
     public UserResponse registerUser(RegisterUserRequest registerUserRequest) {
         User user = registerUserRequest.toUser();
         userRepository.save(user);
+        return new UserResponse(user.getId(), user.getName(), user.getUserLevel());
+    }
+
+    public UserResponse grantUser(Long userId) {
+        User user = getUserById(userId);
+        user.setUserLevel(UserLevel.ADMIN);
+
         return new UserResponse(user.getId(), user.getName(), user.getUserLevel());
     }
 }

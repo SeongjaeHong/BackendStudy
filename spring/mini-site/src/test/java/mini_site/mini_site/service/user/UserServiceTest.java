@@ -57,9 +57,20 @@ class UserServiceTest {
                 // Check default userLevel
                 () -> Assertions.assertThat(foundUser.getUserLevel()).isEqualTo(userResponse.userLevel())
         );
+    }
 
+    @DisplayName("사용자에게 관리자 권한을 부여한다.")
+    @Test
+    void grantAdmin() {
+        // given
+        RegisterUserRequest registerUserRequest = new RegisterUserRequest("name1", "pass");
+        UserResponse userResponse = userService.registerUser(registerUserRequest);
 
-        assertEquals("name1", userResponse.name());
-        assertEquals(UserLevel.MEMBER, userResponse.userLevel());
+        // when
+        userService.grantUser(userResponse.userId());
+        UserResponse foundUser = userService.findUserById(userResponse.userId());
+
+        // then
+        assertEquals(UserLevel.ADMIN, foundUser.userLevel());
     }
 }
