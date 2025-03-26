@@ -28,7 +28,7 @@ public class MemberService {
 
     @Transactional
     public MemberResponse registerMember(RegisterMemberRequest registerMemberRequest) {
-        Member member = registerMemberRequest.toMember();
+        Member member = registerMemberRequest.toEntity();
         memberRepository.save(member);
         return new MemberResponse(member.getId(), member.getName(), member.getMemberLevel());
     }

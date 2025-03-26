@@ -6,7 +6,7 @@ public record RegisterMemberRequest(
         String name,
         String password
 ) {
-    public Member toMember() {
+    public Member toEntity() {
         return Member.builder()
                 .name(name)
                 .password(password)
