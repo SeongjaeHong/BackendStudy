@@ -20,10 +20,8 @@ public class MemberService {
         return memberRepository.findById(memberId).orElseThrow(() -> new MemberException("요청한 사용자를 찾을 수 없습니다."));
     }
 
-    public MemberResponse findMemberById(Long memberId) {
-        Member foundMember = getMemberById(memberId);
-
-        return new MemberResponse(foundMember.getId(), foundMember.getName(), foundMember.getMemberLevel());
+    public Member findMemberById(Long memberId) {
+        return getMemberById(memberId);
     }
 
     @Transactional

@@ -30,12 +30,12 @@ class MemberServiceTest {
         MemberResponse memberResponse = memberService.registerMember(registerMemberRequest);
 
         // when
-        MemberResponse foundMember = memberService.findMemberById(memberResponse.memberId());
+        Member foundMember = memberService.findMemberById(memberResponse.memberId());
 
         // then
         assertAll(
-                () -> Assertions.assertThat(foundMember.name()).isEqualTo(memberResponse.name()),
-                () -> Assertions.assertThat(foundMember.memberLevel()).isEqualTo(memberResponse.memberLevel())
+                () -> Assertions.assertThat(foundMember.getName()).isEqualTo(memberResponse.name()),
+                () -> Assertions.assertThat(foundMember.getMemberLevel()).isEqualTo(memberResponse.memberLevel())
         );
     }
 
@@ -65,9 +65,9 @@ class MemberServiceTest {
 
         // when
         memberService.grantMember(memberResponse.memberId());
-        MemberResponse foundMember = memberService.findMemberById(memberResponse.memberId());
+        Member foundMember = memberService.findMemberById(memberResponse.memberId());
 
         // then
-        assertEquals(MemberLevel.ADMIN, foundMember.memberLevel());
+        assertEquals(MemberLevel.ADMIN, foundMember.getMemberLevel());
     }
 }
