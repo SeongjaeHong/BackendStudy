@@ -42,5 +42,7 @@ public class Post {
         this.member = member;
         this.billboard = billboard;
         this.content = content;
+
+        billboard.addPost(this);
     }
 }

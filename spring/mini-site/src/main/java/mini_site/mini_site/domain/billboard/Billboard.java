@@ -24,4 +24,8 @@ public class Billboard {
     public Billboard(String name) {
         this.name = name;
     }
+
+    public void addPost(Post post) {
+        this.posts.add(post);
+    }
 }
