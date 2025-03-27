@@ -37,11 +37,13 @@ class PostServiceTest {
 
         // when
         ResponseEntity<PostResponse> postResponseResponseEntity = postService.writePost(postRequest);
-        PostResponse postResponse = postResponseResponseEntity.getBody();
 
         // then
         assertEquals(200, postResponseResponseEntity.getStatusCode().value());
+
+        PostResponse postResponse = postResponseResponseEntity.getBody();
         assertNotNull(postResponse);
+
         Post foundPost = postService.findPostById(postResponse.postId());
         assertEquals(postResponse.postId(), foundPost.getId());
     }
