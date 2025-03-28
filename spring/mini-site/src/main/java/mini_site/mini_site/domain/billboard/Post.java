@@ -6,8 +6,8 @@ import lombok.Getter;
 import mini_site.mini_site.domain.member.Member;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -17,17 +17,17 @@ public class Post {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "billboard_id", referencedColumnName = "billboard_id")
+    @JoinColumn(name = "billboard_id")
     private Billboard billboard;
 
     private String content; // TODO: 타입 고민. 글, 그림 등을 포함할 수 있어야 함.
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<>();
+    private Set<Comment> comments = new HashSet<>();
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -42,7 +42,5 @@ public class Post {
         this.member = member;
         this.billboard = billboard;
         this.content = content;
-
-        billboard.addPost(this);
     }
 }
