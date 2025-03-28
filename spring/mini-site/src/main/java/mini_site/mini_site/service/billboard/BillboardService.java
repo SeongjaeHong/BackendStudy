@@ -40,7 +40,14 @@ public class BillboardService {
 
         List<PostResponse> postResponses = new ArrayList<>();
         for (Post post : billboard.getPosts()) {
-            postResponses.add(new PostResponse(post.getId(), post.getMember().getId(), billBoardId, post.getContent()));
+            postResponses.add(
+                    new PostResponse(
+                            post.getId(),
+                            post.getTitle(),
+                            post.getCreatedAt(),
+                            post.getMember().getName(),
+                            billBoardId)
+            );
         }
         return postResponses;
     }

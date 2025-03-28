@@ -33,19 +33,14 @@ class PostServiceTest {
         Billboard billboard = new Billboard("name");
         billboardRepository.save(billboard);
 
-        PostRequest postRequest = new PostRequest(member.getId(), billboard.getId(), "content");
+        PostRequest postRequest = new PostRequest("post-1", member.getId(), billboard.getId(), "content");
 
         // when
-        ResponseEntity<PostResponse> postResponseResponseEntity = postService.writePost(postRequest);
+        Long postId = postService.writePost(postRequest);
 
         // then
-        assertEquals(200, postResponseResponseEntity.getStatusCode().value());
-
-        PostResponse postResponse = postResponseResponseEntity.getBody();
-        assertNotNull(postResponse);
-
-        Post foundPost = postService.findPostById(postResponse.postId());
-        assertEquals(postResponse.postId(), foundPost.getId());
+        Post foundPost = postService.findPostById(postId);
+        assertEquals(postId, foundPost.getId());
     }
 
     @Test
@@ -57,15 +52,13 @@ class PostServiceTest {
         Billboard billboard = new Billboard("name");
         billboardRepository.save(billboard);
 
-        PostRequest postRequest = new PostRequest(member.getId(), billboard.getId(), "content");
+        PostRequest postRequest = new PostRequest("post-1", member.getId(), billboard.getId(), "content");
 
         // when
-        ResponseEntity<PostResponse> postResponseResponseEntity = postService.writePost(postRequest);
-        PostResponse postResponse = postResponseResponseEntity.getBody();
-        assertNotNull(postResponse);
-        postService.deletePostById(postResponse.postId());
+        Long postId = postService.writePost(postRequest);
+        postService.deletePostById(postId);
 
         // then
-        assertFalse(postRepository.existsById(postResponse.postId()));
+        assertFalse(postRepository.existsById(postId));
     }
 }

@@ -16,6 +16,8 @@ public class Post {
     @Column(name = "post_id")
     private Long id;
 
+    private String title;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -35,10 +37,12 @@ public class Post {
 
     @Builder
     public Post(
+            String title,
             Member member,
             Billboard billboard,
             String content
     ) {
+        this.title = title;
         this.member = member;
         this.billboard = billboard;
         this.content = content;

@@ -1,12 +1,10 @@
 package mini_site.mini_site.service.billboard;
 
 import mini_site.mini_site.domain.billboard.Billboard;
-import mini_site.mini_site.domain.billboard.Post;
 import mini_site.mini_site.domain.member.Member;
 import mini_site.mini_site.domain.member.MemberLevel;
 import mini_site.mini_site.exception.BillboardException;
 import mini_site.mini_site.repository.billboard.BillboardRepository;
-import mini_site.mini_site.repository.billboard.PostRepository;
 import mini_site.mini_site.repository.member.MemberRepository;
 import mini_site.mini_site.service.billboard.dto.request.PostRequest;
 import mini_site.mini_site.service.billboard.dto.response.PostResponse;
@@ -15,7 +13,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -29,7 +26,6 @@ class BillboardServiceTest {
     @Autowired PostService postService;
 
     @Autowired BillboardRepository billboardRepository;
-    @Autowired PostRepository postRepository;
     @Autowired MemberRepository memberRepository;
 
     @DisplayName("게시판을 등록한다.")
@@ -69,8 +65,8 @@ class BillboardServiceTest {
         Billboard billboard = new Billboard("board-1");
         billboardRepository.save(billboard);
 
-        ResponseEntity<PostResponse> res1 = postService.writePost(new PostRequest(member.getId(), billboard.getId(), "content-1"));
-        ResponseEntity<PostResponse> res2 = postService.writePost(new PostRequest(member.getId(), billboard.getId(), "content-2"));
+        Long postId1 = postService.writePost(new PostRequest("post-1", member.getId(), billboard.getId(), "content-1"));
+        Long postId2 = postService.writePost(new PostRequest("post-2", member.getId(), billboard.getId(), "content-2"));
 
         // when
         List<PostResponse> posts = billboardService.findPostsByBoardId(billboard.getId());
@@ -78,8 +74,8 @@ class BillboardServiceTest {
         // then
         assertEquals(2, posts.size());
         assertAll(
-                () -> assertEquals(res1.getBody().postId(), posts.get(0).postId()),
-                () -> assertEquals(res2.getBody().postId(), posts.get(1).postId())
+                () -> assertEquals(postId1, posts.get(0).postId()),
+                () -> assertEquals(postId2, posts.get(1).postId())
         );
     }
 }
