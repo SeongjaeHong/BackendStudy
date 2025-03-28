@@ -43,4 +43,12 @@ public class Post {
         this.billboard = billboard;
         this.content = content;
     }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+
+    public void deleteComment(Comment comment) {
+        comments.remove(comment);
+    }
 }
