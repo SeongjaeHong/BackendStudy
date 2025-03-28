@@ -2,12 +2,17 @@ package mini_site.mini_site.service.billboard;
 
 import lombok.RequiredArgsConstructor;
 import mini_site.mini_site.domain.billboard.Billboard;
+import mini_site.mini_site.domain.billboard.Post;
 import mini_site.mini_site.domain.member.MemberLevel;
 import mini_site.mini_site.exception.BillboardException;
 import mini_site.mini_site.repository.billboard.BillboardRepository;
+import mini_site.mini_site.service.billboard.dto.response.PostResponse;
 import mini_site.mini_site.service.member.dto.response.MemberResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +33,16 @@ public class BillboardService {
 
     public Billboard findBillboardById(Long billBoardId) {
         return billboardRepository.findById(billBoardId).orElseThrow(() -> new BillboardException("요청한 게시판을 찾을 수 없습니다."));
+    }
+
+    public List<PostResponse> findPostsByBoardId(Long billBoardId) {
+        Billboard billboard = billboardRepository.findById(billBoardId).orElseThrow(() -> new BillboardException("요청한 게시판을 찾을 수 없습니다."));
+
+        List<PostResponse> postResponses = new ArrayList<>();
+        for (Post post : billboard.getPosts()) {
+            postResponses.add(new PostResponse(post.getId(), post.getMember().getId(), billBoardId, post.getContent()));
+        }
+        return postResponses;
     }
 
     // 현제 페이지 게시글 보여주기
