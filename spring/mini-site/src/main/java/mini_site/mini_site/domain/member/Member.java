@@ -9,8 +9,8 @@ import mini_site.mini_site.domain.billboard.Comment;
 import mini_site.mini_site.domain.billboard.Post;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -34,15 +34,31 @@ public class Member {
     @Temporal(TemporalType.TIMESTAMP)
     private String createdAt;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Post> posts = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Post> posts = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Comment> comments = new HashSet<>();
 
     @Builder
     public Member(String name, String password) {
         this.name = name;
         this.password = password;
+    }
+
+    public void addPost(Post post) {
+        posts.add(post);
+    }
+
+    public void deletePost(Post post) {
+        posts.remove(post);
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+
+    public void deleteComment(Comment comment) {
+        comments.remove(comment);
     }
 }
