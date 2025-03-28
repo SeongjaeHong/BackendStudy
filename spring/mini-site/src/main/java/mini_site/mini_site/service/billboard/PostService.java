@@ -26,6 +26,9 @@ public class PostService {
     public ResponseEntity<PostResponse> writePost(PostRequest postRequest) {
         Post post = getEntity(postRequest);
         postRepository.save(post);
+
+        addPostToEntity(post);
+
         return ResponseEntity.ok(
                 new PostResponse(
                         post.getId(),
@@ -39,6 +42,10 @@ public class PostService {
     // 글 삭제
     @Transactional
     public void deletePostById(Long postId) {
+        Post post = findPostById(postId);
+
+        deletePostFromEntity(post);
+
         postRepository.deleteById(postId);
     }
 
@@ -50,5 +57,21 @@ public class PostService {
         Member member = memberService.findMemberById(postRequest.memberId());
         Billboard billboard = billboardService.findBillboardById(postRequest.billboardId());
         return new Post(member, billboard, postRequest.content());
+    }
+
+    private void addPostToEntity(Post post) {
+        // Add in the billboard
+        post.getBillboard().addPost(post);
+
+        // Add in the member
+        post.getMember().addPost(post);
+    }
+
+    private void deletePostFromEntity(Post post) {
+        // Delete from the billboard
+        post.getBillboard().deletePost(post);
+
+        // Delete from the member
+        post.getMember().deletePost(post);
     }
 }
