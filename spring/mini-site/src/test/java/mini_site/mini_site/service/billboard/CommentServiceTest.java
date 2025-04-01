@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -204,7 +206,11 @@ class CommentServiceTest {
         Long commentId3 = commentService.writeComment(commentRequest3);
 
         // when
+        List<Comment> commentsByMemberId = commentService.findCommentsByMemberId(member.getId());
 
         // then
+        assertEquals(commentId, commentsByMemberId.get(0).getId());
+        assertEquals(commentId2, commentsByMemberId.get(1).getId());
+        assertEquals(commentId3, commentsByMemberId.get(2).getId());
     }
 }
