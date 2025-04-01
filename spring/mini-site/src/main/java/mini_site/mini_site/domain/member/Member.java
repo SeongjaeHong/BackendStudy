@@ -33,10 +33,10 @@ public class Member {
     @Temporal(TemporalType.TIMESTAMP)
     private String createdAt;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Map<Long, Post> posts = new LinkedHashMap();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private Map<Long, Post> posts = new LinkedHashMap<>();
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private Map<Long, Comment> comments = new LinkedHashMap<>();
 
     @Builder
