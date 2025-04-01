@@ -2,6 +2,7 @@ package mini_site.mini_site.service.billboard;
 
 import lombok.RequiredArgsConstructor;
 import mini_site.mini_site.domain.billboard.Billboard;
+import mini_site.mini_site.domain.billboard.Comment;
 import mini_site.mini_site.domain.billboard.Post;
 import mini_site.mini_site.domain.member.Member;
 import mini_site.mini_site.exception.PostException;
@@ -11,6 +12,7 @@ import mini_site.mini_site.service.member.MemberService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +41,11 @@ public class PostService {
         deletePostFromEntity(post);
 
         postRepository.deleteById(postId);
+    }
+
+    public List<Comment> getComments(Long postId) {
+        Post post = findPostById(postId);
+        return post.getComments();
     }
 
     public Post findPostById(Long postId) {
