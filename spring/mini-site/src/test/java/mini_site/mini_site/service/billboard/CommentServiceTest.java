@@ -10,6 +10,7 @@ import mini_site.mini_site.repository.billboard.CommentRepository;
 import mini_site.mini_site.repository.billboard.PostRepository;
 import mini_site.mini_site.repository.member.MemberRepository;
 import mini_site.mini_site.service.billboard.dto.request.CommentRequest;
+import mini_site.mini_site.service.billboard.dto.response.CommentResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -178,6 +179,7 @@ class CommentServiceTest {
         assertThrowsExactly(CommentException.class, () -> commentService.findCommentById(commentId3));
     }
 
+    @DisplayName("사용자가 작성한 댓글을 모두 조회한다.")
     @Test
     void findCommentsByMemberId() {
         // given
@@ -206,11 +208,11 @@ class CommentServiceTest {
         Long commentId3 = commentService.writeComment(commentRequest3);
 
         // when
-        List<Comment> commentsByMemberId = commentService.findCommentsByMemberId(member.getId());
+        List<CommentResponse> commentsByMemberId = commentService.findCommentsByMemberId(member.getId());
 
         // then
-        assertEquals(commentId, commentsByMemberId.get(0).getId());
-        assertEquals(commentId2, commentsByMemberId.get(1).getId());
-        assertEquals(commentId3, commentsByMemberId.get(2).getId());
+        assertEquals(commentId, commentsByMemberId.get(0).commentId());
+        assertEquals(commentId2, commentsByMemberId.get(1).commentId());
+        assertEquals(commentId3, commentsByMemberId.get(2).commentId());
     }
 }

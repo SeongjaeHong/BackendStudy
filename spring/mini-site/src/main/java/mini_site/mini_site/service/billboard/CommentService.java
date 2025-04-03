@@ -7,10 +7,12 @@ import mini_site.mini_site.domain.member.Member;
 import mini_site.mini_site.exception.CommentException;
 import mini_site.mini_site.repository.billboard.CommentRepository;
 import mini_site.mini_site.service.billboard.dto.request.CommentRequest;
+import mini_site.mini_site.service.billboard.dto.response.CommentResponse;
 import mini_site.mini_site.service.member.MemberService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,9 +41,22 @@ public class CommentService {
         deleteCommentFromEntity(comment);
     }
 
-    public List<Comment> findCommentsByMemberId(Long memberId) {
+    public List<CommentResponse> findCommentsByMemberId(Long memberId) {
         Member member = memberService.findMemberById(memberId);
-        return member.getComments();
+
+        List<CommentResponse> commentResponses = new ArrayList<>();
+        for (Comment comment : member.getComments()) {
+            commentResponses.add(
+                    new CommentResponse(
+                            comment.getId(),
+                            memberId,
+                            member.getName(),
+                            comment.getContent(),
+                            comment.getCreatedAt()
+                    )
+            );
+        }
+        return commentResponses;
     }
 
     public Comment findCommentById(Long commentId) {
