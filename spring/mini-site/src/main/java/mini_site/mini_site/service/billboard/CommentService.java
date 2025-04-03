@@ -81,7 +81,7 @@ public class CommentService {
         comment.getMember().deleteComment(comment);
 
         if (comment.getChildComments().isEmpty()) {
-            comment.getPost().deleteComment(comment);
+            comment.getPost().deleteComment(comment.getId());
             if (comment.getParentComment() != null) {
                 comment.getParentComment().deleteChildComment(comment);
             }
@@ -105,7 +105,7 @@ public class CommentService {
         }
 
         if (parentComment.isVestige() && parentComment.getChildComments().isEmpty()) {
-            parentComment.getPost().deleteComment(parentComment);
+            parentComment.getPost().deleteComment(parentComment.getId());
             if (parentComment.getParentComment() != null) {
                 parentComment.getParentComment().deleteChildComment(parentComment);
             }
