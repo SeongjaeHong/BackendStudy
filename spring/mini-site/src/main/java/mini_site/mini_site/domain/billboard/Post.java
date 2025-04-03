@@ -32,8 +32,7 @@ public class Post {
     private String content; // TODO: 타입 고민. 글, 그림 등을 포함할 수 있어야 함.
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "post")
-    private
-    Map<Long, Comment> comments = new LinkedHashMap<>();  // 댓글
+    private Map<Long, Comment> comments = new LinkedHashMap<>();  // 댓글
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -58,5 +57,9 @@ public class Post {
 
     public void deleteComment(Long commentId) {
         comments.remove(commentId);
+    }
+
+    public List<Comment> getComments() {
+        return new ArrayList<>(comments.values());
     }
 }
