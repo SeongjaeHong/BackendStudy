@@ -35,6 +35,10 @@ public class BillboardService {
         return billboardRepository.findById(billBoardId).orElseThrow(() -> new BillboardException("요청한 게시판을 찾을 수 없습니다."));
     }
 
+    public List<Billboard> findAllBillboards() {
+        return billboardRepository.findAll();
+    }
+
     public List<PostResponse> findPostsByBoardId(Long billBoardId) {
         Billboard billboard = billboardRepository.findById(billBoardId).orElseThrow(() -> new BillboardException("요청한 게시판을 찾을 수 없습니다."));
 
