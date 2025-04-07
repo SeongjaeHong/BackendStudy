@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header (boardName=${boardName})"></head>
+<body style="background-color:#999">
+<nav th:replace="fragments/bodyHeader :: nav (boards=${boards})"></nav>
+<div class="container-lg" style="max-width:1050px; background-color:#fff">
+    <div>
+        <div class="mb-3">
+            <div>
+                <a href="#" class="fs-2 fw-bold text-decoration-none" style="color:#093375">일반 게시판</a>
+            </div>
+        </div>
+        <div>
+            <table class="table table-hover" style="table-layout: fixed; width:100%">
+                <tr th:each="post: ${posts}">
+                    <td>
+                        <div>
+                            <span class="d-inline-block text-truncate" style="width:80%; vertical-align:top;" th:text="${post.title}">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span>
+                            <span th:text="${{#lists.size(post.comments)}">0</span>  <!-- 댓글 수 -->
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                            <span class="me-1" style="color:#3493ff">
+                                <span><i class="fa-regular fa-thumbs-up"></i></span>
+                                <span th:text="${post.vote}">0</span>  <!-- 추천 수 -->
+                            </span>
+                                <span style="color:#999999">
+                                    <span><i class="far fa-clock"></i></span>
+                                    <span th:text="${post.createdAt}">2025-04-07</span>  <!-- 작성 시간 -->
+                                </span>
+                            </div>
+                            <div>
+                                <span th:text="${post.member}">작성자</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="d-flex justify-content-end">
+                <!--  TODO: parameter로 현재 게시판명, 쓰기 action 넘기기. 현재 게시판명에 따른 Header를 유지하기 위함  -->
+                <a href="/write" class="text-decoration-none">
+                    <i class="fa-solid fa-pencil"></i>
+                    쓰기
+                </a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+</body>
+</html>
