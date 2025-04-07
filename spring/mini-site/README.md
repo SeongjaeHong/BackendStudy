@@ -23,6 +23,13 @@
 
     (DTO 내부에서 toEntity 같은 함수로 대체)
 
+### JAVA
+* Record class - 2025. 03. 22
+  * Boiler plate 코드(생성자, Getter, equals, hashcode, toString) 생략
+  * 데이터 불변성 보장
+  * 데이터 보관용 객체 명확화
+  * DTO 객체 생성에 사용
+
 ### JPA
 * orphanRemoval - 2025. 03. 28
   * 부모 Entity 제거 시 자식 Entity 모두 제거
@@ -30,18 +37,16 @@
     
       (탈퇴한 사용자가 작성한 글/댓글, 상위 댓글이 삭제된 대댓글 등)
 
-### JAVA
-* Record class - 2025. 03. 22
-    * Boiler plate 코드(생성자, Getter, equals, hashcode, toString) 생략
-    * 데이터 불변성 보장
-    * 데이터 보관용 객체 명확화
-    * DTO 객체 생성에 사용
-
-
 * LinkedHashMap - 2025. 03. 28
   * 사용자가 작성한 댓글, 게시글 정보 저장  
     * 사용자가 작성한 글 조회 시 작성 순서대로 조회
     * 사용자가 작성한 글이 많아져도 삭제 시간을 O(1)으로 유지
+
+### Thymeleaf
+* fragment - 2025. 04. 07
+  * HTML 파일 내 Element를 다른 파일에서 불러올 때 사용
+  * Navagation에 Model attribute 전달하여 게시판 생성 등
+
 
 ### Git
 * revert - 2025. 04. 03
