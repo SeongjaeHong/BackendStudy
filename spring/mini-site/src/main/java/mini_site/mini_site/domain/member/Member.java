@@ -2,9 +2,7 @@ package mini_site.mini_site.domain.member;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import mini_site.mini_site.domain.billboard.Comment;
 import mini_site.mini_site.domain.billboard.Post;
 import org.hibernate.annotations.CreationTimestamp;
@@ -13,6 +11,7 @@ import java.util.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
     @Id @GeneratedValue
     @Column(name = "member_id")

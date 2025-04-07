@@ -2,7 +2,9 @@ package mini_site.mini_site.domain.billboard;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -11,6 +13,7 @@ import java.util.Map;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Billboard {
     @Id @GeneratedValue
     @Column(name = "billboard_id")

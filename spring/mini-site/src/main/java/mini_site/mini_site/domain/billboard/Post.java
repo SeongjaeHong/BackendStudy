@@ -12,7 +12,7 @@ import java.util.*;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)  // 기본 생성자 보호
+@NoArgsConstructor(access = AccessLevel.PROTECTED)  // 기본 생성자 보호
 public class Post {
     @Id @GeneratedValue
     @Column(name = "post_id")
