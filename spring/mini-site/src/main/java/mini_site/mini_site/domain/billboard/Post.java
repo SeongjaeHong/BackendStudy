@@ -31,6 +31,8 @@ public class Post {
     @Lob
     private String content; // TODO: 타입 고민. 글, 그림 등을 포함할 수 있어야 함.
 
+    private Integer vote = 0;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "post")
     private Map<Long, Comment> comments = new LinkedHashMap<>();  // 댓글
 
@@ -61,5 +63,13 @@ public class Post {
 
     public List<Comment> getComments() {
         return new ArrayList<>(comments.values());
+    }
+
+    public void upVote() {
+        vote += 1;
+    }
+
+    public void downVote() {
+        vote -= 1;
     }
 }
