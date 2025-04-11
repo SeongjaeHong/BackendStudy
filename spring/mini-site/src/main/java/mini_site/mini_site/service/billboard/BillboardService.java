@@ -39,7 +39,7 @@ public class BillboardService {
         return billboardRepository.findAll().stream()
                 .filter(board -> board.getName().equals(billBoardName))
                 .findFirst()
-                .orElseThrow(() -> new BillboardException("요청한 게시판을 찾을 수 없습니다."));
+                .orElseThrow(() -> new BillboardException("요청한 게시판을 찾을 수 없습니다:" + billBoardName));
     }
 
     public List<Billboard> findAllBillboards() {
