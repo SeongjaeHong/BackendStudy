@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav" th:each="board: ${boards}">
         <li class="nav-item">
-          <a class="nav-link" th:classappend="${board.name} == ${boardName}? 'active'" aria-current="page" href="#" th:text="${board.name}">게시판</a>
+          <a class="nav-link" th:classappend="${board.name} == ${boardName}? 'active'" aria-current="page" th:href="@{'/' + ${boardName}}" th:text="${board.name}">게시판</a>
         </li>
       </ul>
     </div>

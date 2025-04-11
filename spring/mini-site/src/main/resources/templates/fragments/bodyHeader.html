@@ -2,6 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div class="mb-3" th:fragment="bodyHeader (boardName)">
   <div>
-    <a href="#" class="fs-2 fw-bold text-decoration-none" style="color:#093375" th:text="${boardName}">일반 게시판</a>
+    <a th:href="@{'/' + ${boardName}}" class="fs-2 fw-bold text-decoration-none" style="color:#093375" th:text="${boardName}">일반 게시판</a>
   </div>
 </div>
