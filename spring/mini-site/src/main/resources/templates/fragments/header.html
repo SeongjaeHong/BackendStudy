@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title th:text="|${boardName} - Mini Site|">Header</title>
+    <title th:if="${boardName} != ''" th:text="|${boardName} - Mini Site|">Header</title>
+    <title th:unless="${boardName} != ''" th:text="|Mini Site|">Header</title>
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/78e1860a6b.js" crossorigin="anonymous"></script>
