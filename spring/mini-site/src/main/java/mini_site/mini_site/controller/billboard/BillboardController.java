@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -16,13 +15,8 @@ public class BillboardController {
     private final BillboardService billboardService;
 
     @GetMapping("/")
-    public String base(Model model){
-        String defaultBoard = "일반 게시판";
-        Billboard foundBoard = billboardService.findBillboardByName(defaultBoard);
-        model.addAttribute("posts", foundBoard.getPosts());
-        model.addAttribute("boardName", foundBoard.getName());
-        model.addAttribute("boards", billboardService.findAllBillboards());
-        return "home";
+    public String base(){
+        return "login";
     }
 
     @GetMapping("/{boardName}")
