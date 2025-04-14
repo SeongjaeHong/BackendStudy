@@ -18,15 +18,18 @@ public class Member {
     private Long id;
 
     @NotBlank
+    private String loginId;
+
+    @NotBlank
+    @Setter
+    private String password;
+
+    @NotBlank
     @Setter
     private String name;
 
     @Setter
     private MemberLevel memberLevel = MemberLevel.MEMBER;
-
-    @NotBlank
-    @Setter
-    private String password;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
