@@ -1,6 +1,5 @@
 package mini_site.mini_site.controller.billboard;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import mini_site.mini_site.domain.billboard.Billboard;
 import mini_site.mini_site.service.billboard.BillboardService;
