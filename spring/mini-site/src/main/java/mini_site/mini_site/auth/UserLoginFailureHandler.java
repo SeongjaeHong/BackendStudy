@@ -22,7 +22,11 @@ public class UserLoginFailureHandler extends SimpleUrlAuthenticationFailureHandl
             errorMessage = ErrorMessage.LOGIN_FAILED;
         }
 
-        setDefaultFailureUrl("/login?error=true&errorMessage=" + errorMessage.getMsg());
+        setDefaultFailureUrl("/login");
+
+        request.getSession().setAttribute("error", true);
+        request.getSession().setAttribute("errorMessage", errorMessage.getMsg());
+
         super.onAuthenticationFailure(request, response, exception);
     }
 }
