@@ -3,10 +3,6 @@ package mini_site.mini_site.auth.message;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-
 @Getter
 @RequiredArgsConstructor
 public enum ErrorMessage {
@@ -15,8 +11,4 @@ public enum ErrorMessage {
 
     private final int status;
     private final String msg;
-
-    public String getMsg() throws UnsupportedEncodingException {
-        return URLEncoder.encode(msg, StandardCharsets.UTF_8);
-    }
 }
