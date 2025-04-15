@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,13 +32,13 @@
         <img class="mb-4" src="/assets/site-logo.png" alt="" width="502" height="142">
     </div>
     <main class="form-signin">
-        <form>
+        <form th:action="@{/login}" method="post">
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInput" placeholder="ID">
+                <input type="text" name="loginId" class="form-control" id="floatingInput" placeholder="ID">
                 <label for="floatingInput">ID</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" autocomplete="new-password">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" autocomplete="new-password">
                 <label for="floatingPassword">Password</label>
             </div>
 
