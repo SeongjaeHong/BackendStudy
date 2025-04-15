@@ -1,5 +1,6 @@
 package mini_site.mini_site.controller.billboard;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import mini_site.mini_site.domain.billboard.Billboard;
 import mini_site.mini_site.service.billboard.BillboardService;
@@ -14,11 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BillboardController {
     private final BillboardService billboardService;
 
-    @GetMapping("/")
-    public String base(){
-        return "login";
-    }
-
     @GetMapping("/{boardName}")
     public String home(@PathVariable String boardName, Model model){
         Billboard foundBoard = billboardService.findBillboardByName(boardName);
@@ -30,7 +26,7 @@ public class BillboardController {
 
     // 글 작성 페이지
     @GetMapping("/write")
-    public String writePost(@RequestParam("board") String boardName, Model model) {        
+    public String writePost(@RequestParam("board") String boardName, Model model) {
         Billboard foundBoard = billboardService.findBillboardByName(boardName);
         model.addAttribute("boardName", foundBoard.getName());
         model.addAttribute("boards", billboardService.findAllBillboards());
