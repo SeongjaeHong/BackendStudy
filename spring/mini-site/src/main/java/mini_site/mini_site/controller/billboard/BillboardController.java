@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BillboardController {
     private final BillboardService billboardService;
 
-    @GetMapping("/{boardName}")
+    @GetMapping(value = {"/", "/{boardName}"})
     public String home(@PathVariable String boardName, Model model){
         Billboard foundBoard = billboardService.findBillboardByName(boardName);
         model.addAttribute("posts", foundBoard.getPosts());
