@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header (boardName=${boardName})"></head>
+<head>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/78e1860a6b.js" crossorigin="anonymous"></script>
+    <th:block th:include="fragments/header :: header"></th:block>
+</head>
 <body style="background-color:#999">
 <nav th:replace="fragments/navigation :: nav (boards=${boards})"></nav>
 <div class="container-lg" style="max-width:1050px; background-color:#fff">
