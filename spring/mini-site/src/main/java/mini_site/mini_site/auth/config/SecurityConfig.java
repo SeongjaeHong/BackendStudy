@@ -21,7 +21,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)  // disable csrf filtration
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/css/**", "assets/**").permitAll()  // // allow access to login page and static files
+                        .requestMatchers("/login", "/signup", "/css/**", "/assets/**").permitAll()  // allow access to login page and static files
                         .anyRequest().authenticated()  // all other requests need auth
                 )
                 .formLogin(form -> form
