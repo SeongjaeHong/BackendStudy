@@ -20,7 +20,8 @@ public class LoginController {
 
         model.addAttribute("error", session.getAttribute("error"));
         model.addAttribute("errorMessage", session.getAttribute("errorMessage"));
-        model.addAttribute("/login", "/login");
+        model.addAttribute("login", "/login");
+        model.addAttribute("signup", "/signup");
 
         if (session.getAttribute("error") != null) {
             request.getSession().removeAttribute("error");
