@@ -20,7 +20,11 @@ public class MemberDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
         Member member;
         try {
-            member = memberService.findMemberByLoginId(loginId);
+            member = memberService.findMemberByLoginId(loginId)
+                    .orElseThrow(() -> new MemberException(
+                            MemberException.MemberExceptionMessage.MEMBER_LOGIN_ID_NOT_FOUND,
+                            loginId)
+                    );
         } catch (MemberException e) {
             throw new UsernameNotFoundException(e.getMessage());
         }
