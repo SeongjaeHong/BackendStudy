@@ -13,7 +13,7 @@ import org.springframework.security.web.savedrequest.SavedRequest;
 
 import java.io.IOException;
 
-public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
+public class MemberLoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
