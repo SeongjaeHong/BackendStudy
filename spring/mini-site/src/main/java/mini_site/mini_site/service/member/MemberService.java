@@ -1,6 +1,8 @@
 package mini_site.mini_site.service.member;
 
 import lombok.RequiredArgsConstructor;
+import mini_site.mini_site.auth.exception.SignUpException;
+import mini_site.mini_site.auth.message.SignUpMessage;
 import mini_site.mini_site.domain.member.Member;
 import mini_site.mini_site.domain.member.MemberLevel;
 import mini_site.mini_site.exception.MemberException;
@@ -37,11 +39,11 @@ public class MemberService {
         Member member = registerMemberRequest.toEntity();
 
         if (findMemberByLoginId(member.getLoginId()).isPresent()) {
-            throw new MemberException(MemberExceptionMessage.MEMBER_LOGIN_ID_DUPLICATED);
+            throw new SignUpException(SignUpMessage.ID_DUPLICATED);
         }
 
         if (findMemberByName(member.getName()).isPresent()) {
-            throw new MemberException(MemberExceptionMessage.MEMBER_NAME_DUPLICATED);
+            throw new SignUpException(SignUpMessage.NAME_DUPLICATED);
         }
 
         memberRepository.save(member);
