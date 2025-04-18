@@ -11,6 +11,8 @@ import mini_site.mini_site.service.member.dto.response.MemberResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -22,18 +24,12 @@ public class MemberService {
         return memberRepository.findById(memberId).orElseThrow(() -> new MemberException(MemberExceptionMessage.MEMBER_ID_NOT_FOUND, memberId));
     }
 
-    public Member findMemberByLoginId(String loginId) {
-        return memberRepository.findAll().stream()
-                .filter(member -> member.getLoginId().equals(loginId))
-                .findFirst()
-                .orElseThrow(() -> new MemberException(MemberExceptionMessage.MEMBER_LOGIN_ID_NOT_FOUND, loginId));
+    public Optional<Member> findMemberByLoginId(String loginId) {
+        return memberRepository.findByLoginId(loginId);
     }
 
-    public Member findMemberByName(String memberName) {
-        return memberRepository.findAll().stream()
-                .filter(member -> member.getName().equals(memberName))
-                .findFirst()
-                .orElseThrow(() -> new MemberException(MemberExceptionMessage.MEMBER_NAME_NOT_FOUND, memberName));
+    public Optional<Member> findMemberByName(String memberName) {
+        return memberRepository.findByName(memberName);
     }
 
     @Transactional
