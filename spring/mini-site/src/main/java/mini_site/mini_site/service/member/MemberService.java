@@ -19,21 +19,21 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     public Member findMemberById(Long memberId) {
-        return memberRepository.findById(memberId).orElseThrow(() -> new MemberException(MemberExceptionMessage.USER_ID_NOT_FOUND, memberId));
+        return memberRepository.findById(memberId).orElseThrow(() -> new MemberException(MemberExceptionMessage.MEMBER_ID_NOT_FOUND, memberId));
     }
 
     public Member findMemberByLoginId(String loginId) {
         return memberRepository.findAll().stream()
                 .filter(member -> member.getLoginId().equals(loginId))
                 .findFirst()
-                .orElseThrow(() -> new MemberException(MemberExceptionMessage.USER_LOGIN_ID_NOT_FOUND, loginId));
+                .orElseThrow(() -> new MemberException(MemberExceptionMessage.MEMBER_LOGIN_ID_NOT_FOUND, loginId));
     }
 
     public Member findMemberByName(String memberName) {
         return memberRepository.findAll().stream()
                 .filter(member -> member.getName().equals(memberName))
                 .findFirst()
-                .orElseThrow(() -> new MemberException(MemberExceptionMessage.USER_NAME_NOT_FOUND, memberName));
+                .orElseThrow(() -> new MemberException(MemberExceptionMessage.MEMBER_NAME_NOT_FOUND, memberName));
     }
 
     @Transactional
