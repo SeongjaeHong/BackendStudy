@@ -3,6 +3,7 @@
 <head>
     <th:block th:include="fragments/header :: header"></th:block>
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/registrations/registration-7/assets/css/registration-7.css">
+    <script type="text/javascript" src="/js/signUpValidation.js"></script>
 </head>
 <body>
 <section class="bg-light p-3 p-md-4 p-xl-5 p-t-5 min-vw-100 min-vh-100">
@@ -20,24 +21,27 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="#!">
+                        <form th:action="${signup}" method="post" onsubmit="return validateAndSubmit()">
                             <div class="row gy-3 overflow-hidden">
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" name="name" id="name" required>
+                                        <input type="text" class="form-control" name="name" id="name" data-valid="false" oninput="validateInput(this)" required>
                                         <label for="name" class="form-label">이름</label>
+                                        <span id="feedback-name"></span>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" name="memberId" id="memberId" required>
-                                        <label for="memberId" class="form-label">아이디</label>
+                                        <input type="text" class="form-control" name="loginId" id="loginId" data-valid="false" oninput="validateInput(this)" required>
+                                        <label for="loginId" class="form-label">아이디</label>
+                                        <span id="feedback-loginId"></span>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
-                                        <input type="password" class="form-control" name="password" id="password" required>
+                                        <input type="password" class="form-control" name="password" id="password" data-valid="false" oninput="validatePassword(this)" required>
                                         <label for="password" class="form-label">비밀번호</label>
+                                        <span id="feedback-password"></span>
                                     </div>
                                 </div>
                                 <div class="col-12">
