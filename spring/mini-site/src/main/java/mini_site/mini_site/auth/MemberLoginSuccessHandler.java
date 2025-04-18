@@ -27,10 +27,14 @@ public class MemberLoginSuccessHandler implements AuthenticationSuccessHandler {
         }
 
         if(savedRequest == null) { // User entered a login page via clicking a login button
-            String redirectPage = request.getSession().getAttribute("prevPage").toString();
-            if (redirectPage == null) {
+            Object prevPage = request.getSession().getAttribute("prevPage");
+            String redirectPage;
+            if (prevPage != null) {
+                redirectPage = prevPage.toString();
+            } else {
                 redirectPage = "/";
             }
+
             redirectStrategy.sendRedirect(request, response, redirectPage);
         } else {  // User got redirected by Spring Security because they tried to enter a route without access authority
             redirectStrategy.sendRedirect(request, response, savedRequest.getRedirectUrl());

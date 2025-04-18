@@ -10,6 +10,7 @@ import mini_site.mini_site.exception.MemberException.MemberExceptionMessage;
 import mini_site.mini_site.repository.member.MemberRepository;
 import mini_site.mini_site.service.member.dto.request.RegisterMemberRequest;
 import mini_site.mini_site.service.member.dto.response.MemberResponse;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public Member findMemberById(Long memberId) {
         return memberRepository.findById(memberId).orElseThrow(() -> new MemberException(MemberExceptionMessage.MEMBER_ID_NOT_FOUND, memberId));
@@ -45,6 +47,8 @@ public class MemberService {
         if (findMemberByName(member.getName()).isPresent()) {
             throw new SignUpException(SignUpMessage.NAME_DUPLICATED);
         }
+
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
 
         memberRepository.save(member);
         return new MemberResponse(member.getId(), member.getName(), member.getMemberLevel());
