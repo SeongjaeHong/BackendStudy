@@ -15,7 +15,11 @@ public class BillboardController {
     private final BillboardService billboardService;
 
     @GetMapping(value = {"/", "/{boardName}"})
-    public String home(@PathVariable String boardName, Model model){
+    public String home(@PathVariable(required = false) String boardName, Model model){
+        if (boardName == null) {
+            boardName = "일반 게시판";
+        }
+
         Billboard foundBoard = billboardService.findBillboardByName(boardName);
         model.addAttribute("posts", foundBoard.getPosts());
         model.addAttribute("boardName", foundBoard.getName());
