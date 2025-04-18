@@ -1,7 +1,7 @@
 package mini_site.mini_site.auth.config;
 
-import mini_site.mini_site.auth.UserLoginFailureHandler;
-import mini_site.mini_site.auth.UserLoginSuccessHandler;
+import mini_site.mini_site.auth.MemberLoginFailureHandler;
+import mini_site.mini_site.auth.MemberLoginSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,8 +29,8 @@ public class SecurityConfig {
                         .passwordParameter("password")
                         .loginPage("/login")  // GET: login page URL
                         .loginProcessingUrl("/login")  // POST: login process URL
-                        .successHandler(new UserLoginSuccessHandler())
-                        .failureHandler(new UserLoginFailureHandler()))
+                        .successHandler(new MemberLoginSuccessHandler())
+                        .failureHandler(new MemberLoginFailureHandler()))
                 .logout(LogoutConfigurer::permitAll);
 
         return http.build();
