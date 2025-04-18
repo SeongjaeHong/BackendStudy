@@ -51,3 +51,9 @@
 ### Git
 * revert - 2025. 04. 03
   * 원격 저장소에 저장된 commit을 취소하기 위한 새로운 commit 생성
+
+
+### Spring Security
+* AuthenticationManager - 2025. 04. 19
+  * PasswordEncoder, UserDetailsService 등록
+  * 로그인 정보와 DB 정보를 비교하여 인증처리를 수행할 수 있도록 함 
