@@ -35,6 +35,15 @@ public class MemberService {
     @Transactional
     public MemberResponse registerMember(RegisterMemberRequest registerMemberRequest) {
         Member member = registerMemberRequest.toEntity();
+
+        if (findMemberByLoginId(member.getLoginId()).isPresent()) {
+            throw new MemberException(MemberExceptionMessage.MEMBER_LOGIN_ID_DUPLICATED);
+        }
+
+        if (findMemberByName(member.getName()).isPresent()) {
+            throw new MemberException(MemberExceptionMessage.MEMBER_NAME_DUPLICATED);
+        }
+
         memberRepository.save(member);
         return new MemberResponse(member.getId(), member.getName(), member.getMemberLevel());
     }
