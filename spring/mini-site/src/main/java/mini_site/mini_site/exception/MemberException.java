@@ -39,9 +39,7 @@ public class MemberException extends RuntimeException {
     public enum MemberExceptionMessage {
         MEMBER_ID_NOT_FOUND("회원 ID를 찾을 수 없습니다."),
         MEMBER_LOGIN_ID_NOT_FOUND("회원 로그인 ID를 찾을 수 없습니다."),
-        MEMBER_NAME_NOT_FOUND("회원 이름을 찾을 수 없습니다."),
-        MEMBER_LOGIN_ID_DUPLICATED("이미 존재하는 ID입니다."),
-        MEMBER_NAME_DUPLICATED("이미 존재하는 이름입니다.");
+        MEMBER_NAME_NOT_FOUND("회원 이름을 찾을 수 없습니다.");
 
         private final String message;
 
