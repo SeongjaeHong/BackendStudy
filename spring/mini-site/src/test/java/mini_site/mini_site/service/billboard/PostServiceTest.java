@@ -27,7 +27,7 @@ class PostServiceTest {
     @Test
     void writePost() {
         // given
-        Member member = new Member("name", "pwd");
+        Member member = new Member("id", "name", "pwd");
         memberRepository.save(member);
 
         Billboard billboard = new Billboard("name");
@@ -46,7 +46,7 @@ class PostServiceTest {
     @Test
     void deletePost() {
         // given
-        Member member = new Member("name", "pwd");
+        Member member = new Member("id", "name", "pwd");
         memberRepository.save(member);
 
         Billboard billboard = new Billboard("name");

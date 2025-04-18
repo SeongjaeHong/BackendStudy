@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/header :: header"></th:block>
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/registrations/registration-7/assets/css/registration-7.css">
+    <script type="text/javascript" src="/js/signUpValidation.js"></script>
+</head>
+<body>
+<section class="bg-light p-3 p-md-4 p-xl-5 p-t-5 min-vw-100 min-vh-100">
+    <div class="container-lg">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6 col-xxl-5">
+                <div class="card border border-light-subtle rounded-4">
+                    <div class="card-body p-3 p-md-4 p-xl-5">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-5">
+                                    <div class="text-center mb-4">
+                                        <img src="/assets/site-logo.png" alt="Mini site logo" width="251" height="71">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <form th:action="${signup}" method="post" onsubmit="return validateAndSubmit()">
+                            <div class="row gy-3 overflow-hidden">
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" name="name" id="name" data-valid="false" oninput="validateInput(this)" required>
+                                        <label for="name" class="form-label">이름</label>
+                                        <span id="feedback-name"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" name="loginId" id="loginId" data-valid="false" oninput="validateInput(this)" required>
+                                        <label for="loginId" class="form-label">아이디</label>
+                                        <span id="feedback-loginId"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <input type="password" class="form-control" name="password" id="password" data-valid="false" oninput="validatePassword(this)" required>
+                                        <label for="password" class="form-label">비밀번호</label>
+                                        <span id="feedback-password"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-grid">
+                                        <button class="btn bsb-btn-xl btn-primary" type="submit">회원가입</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col-12">
+                                <hr class="mt-5 mb-4 border-secondary-subtle">
+                                <p class="m-0 text-secondary text-center">
+                                    이미 계정이 있나요?
+                                    <a href="/login" class="link-primary text-decoration-none">로그인 하기</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

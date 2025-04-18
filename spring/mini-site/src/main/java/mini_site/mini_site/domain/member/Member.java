@@ -42,9 +42,10 @@ public class Member {
     private Map<Long, Comment> comments = new LinkedHashMap<>();
 
     @Builder
-    public Member(String name, String password) {
-        this.name = name;
+    public Member(String loginId, String password, String name) {
+        this.loginId = loginId;
         this.password = password;
+        this.name = name;
     }
 
     public void addPost(Post post) {

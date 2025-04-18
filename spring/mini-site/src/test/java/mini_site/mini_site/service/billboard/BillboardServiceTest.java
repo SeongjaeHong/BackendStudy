@@ -59,7 +59,7 @@ class BillboardServiceTest {
     @Test
     void findPostsByBillboardId() {
         // given
-        Member member = new Member("user-1", "pwd");
+        Member member = new Member("id", "user-1", "pwd");
         memberRepository.save(member);
 
         Billboard billboard = new Billboard("board-1");

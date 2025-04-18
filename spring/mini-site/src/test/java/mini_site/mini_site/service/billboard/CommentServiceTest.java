@@ -36,7 +36,7 @@ class CommentServiceTest {
     @Test
     void writeComment() {
         // given
-        Member member = new Member("member-1", "pwd");
+        Member member = new Member("id", "member-1", "pwd");
         memberRepository.save(member);
 
         Billboard billboard = new Billboard("board-1");
@@ -61,7 +61,7 @@ class CommentServiceTest {
     @Test
     void deleteComment() {
         // given
-        Member member = new Member("member-1", "pwd");
+        Member member = new Member("id", "member-1", "pwd");
         memberRepository.save(member);
 
         Billboard billboard = new Billboard("board-1");
@@ -85,10 +85,10 @@ class CommentServiceTest {
     @Test
     void writeChildComment() {
         // given
-        Member member = new Member("member-1", "pwd");
+        Member member = new Member("id1", "member-1", "pwd");
         memberRepository.save(member);
 
-        Member member2 = new Member("member-2", "pwd");
+        Member member2 = new Member("id2", "member-2", "pwd");
         memberRepository.save(member2);
 
         Billboard billboard = new Billboard("board-1");
@@ -127,10 +127,10 @@ class CommentServiceTest {
     @Test
     void deleteChildComment() {
         // given
-        Member member = new Member("member-1", "pwd");
+        Member member = new Member("id1", "member-1", "pwd");
         memberRepository.save(member);
 
-        Member member2 = new Member("member-2", "pwd");
+        Member member2 = new Member("id2", "member-2", "pwd");
         memberRepository.save(member2);
 
         Billboard billboard = new Billboard("board-1");
@@ -183,7 +183,7 @@ class CommentServiceTest {
     @Test
     void findCommentsByMemberId() {
         // given
-        Member member = new Member("member-1", "pwd");
+        Member member = new Member("id", "member-1", "pwd");
         memberRepository.save(member);
 
         Billboard billboard = new Billboard("board-1");

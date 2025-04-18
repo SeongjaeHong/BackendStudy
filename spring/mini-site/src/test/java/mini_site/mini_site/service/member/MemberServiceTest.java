@@ -26,7 +26,7 @@ class MemberServiceTest {
     @Test
     void findMemberById() {
         // given
-        RegisterMemberRequest registerMemberRequest = new RegisterMemberRequest("name", "pass");
+        RegisterMemberRequest registerMemberRequest = new RegisterMemberRequest("id", "name", "pass");
         MemberResponse memberResponse = memberService.registerMember(registerMemberRequest);
 
         // when
@@ -43,7 +43,7 @@ class MemberServiceTest {
     @Test
     void registerMember() {
         // given
-        RegisterMemberRequest registerMemberRequest = new RegisterMemberRequest("name123", "pass");
+        RegisterMemberRequest registerMemberRequest = new RegisterMemberRequest("id", "name123", "pass");
 
         // when
         MemberResponse memberResponse = memberService.registerMember(registerMemberRequest);
@@ -60,7 +60,7 @@ class MemberServiceTest {
     @Test
     void grantAdmin() {
         // given
-        RegisterMemberRequest registerMemberRequest = new RegisterMemberRequest("admin", "pass");
+        RegisterMemberRequest registerMemberRequest = new RegisterMemberRequest("id", "admin", "pass");
         MemberResponse memberResponse = memberService.registerMember(registerMemberRequest);
 
         // when

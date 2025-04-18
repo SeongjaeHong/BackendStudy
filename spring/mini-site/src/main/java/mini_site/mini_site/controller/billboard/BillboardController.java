@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BillboardController {
     private final BillboardService billboardService;
 
-    @GetMapping("/")
-    public String base(){
-        return "login";
-    }
+    @GetMapping(value = {"/", "/{boardName}"})
+    public String home(@PathVariable(required = false) String boardName, Model model){
+        if (boardName == null) {
+            boardName = "일반 게시판";
+        }
 
-    @GetMapping("/{boardName}")
-    public String home(@PathVariable String boardName, Model model){
         Billboard foundBoard = billboardService.findBillboardByName(boardName);
         model.addAttribute("posts", foundBoard.getPosts());
         model.addAttribute("boardName", foundBoard.getName());
@@ -30,7 +29,7 @@ public class BillboardController {
 
     // 글 작성 페이지
     @GetMapping("/write")
-    public String writePost(@RequestParam("board") String boardName, Model model) {        
+    public String writePost(@RequestParam("board") String boardName, Model model) {
         Billboard foundBoard = billboardService.findBillboardByName(boardName);
         model.addAttribute("boardName", foundBoard.getName());
         model.addAttribute("boards", billboardService.findAllBillboards());
